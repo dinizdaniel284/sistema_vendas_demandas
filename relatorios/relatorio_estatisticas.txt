@@ -1,0 +1,6 @@
+📊 RELATÓRIO DE ESTATÍSTICAS
+💵 Total de Vendas: R$ 63,100.00
+📦 Produto Mais Vendido: Cabo HDMI
+💰 Produto Mais Lucrativo: Notebook
+🧾 Total de Itens Vendidos: 210
+📉 Produto com Menor Saída: Notebook

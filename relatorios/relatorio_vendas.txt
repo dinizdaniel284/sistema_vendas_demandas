@@ -1,0 +1,14 @@
+📝 RELATÓRIO DE VENDAS
+Gerado em: 18/05/2025 21:10:10
+----------------------------------------
+Total de itens vendidos: 210
+Valor total arrecadado: R$ 63,100.00
+----------------------------------------
+
+DETALHAMENTO POR PRODUTO:
+
+Notebook: 10 und. x R$ 3500.00 = R$ 35000.00
+Mouse: 50 und. x R$ 80.00 = R$ 4000.00
+Teclado: 30 und. x R$ 120.00 = R$ 3600.00
+Monitor: 20 und. x R$ 900.00 = R$ 18000.00
+Cabo HDMI: 100 und. x R$ 25.00 = R$ 2500.00
