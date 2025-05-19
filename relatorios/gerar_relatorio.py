@@ -61,3 +61,7 @@ def gerar_relatorio():
 # Executa a função
 if __name__ == "__main__":
     gerar_relatorio()
+
+
+def gerar_relatorio_vendas():
+    return Nones

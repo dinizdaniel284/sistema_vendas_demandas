@@ -1,5 +1,17 @@
-import pandas as pd
 import os
+import pandas as pd
+from dotenv import load_dotenv
+from pymongo import MongoClient
+
+# Carrega variáveis do .env
+load_dotenv()
+
+# Conecta ao MongoDB
+mongo_uri = os.getenv("MONGO_URI")
+client = MongoClient(mongo_uri)
+
+db = client["sistema_vendas"]
+colecao_vendas = db["vendas"]
 
 # Caminho para planilha
 caminho_planilha = os.path.join("dados", "planilha.xlsx")
@@ -25,7 +37,11 @@ faturamento_por_produto = df.groupby('Produto')['Faturamento'].sum()
 # Análise 4: Faturamento por data
 faturamento_por_data = df.groupby('Data')['Faturamento'].sum()
 
-# Cria diretório para relatórios, se não existir
+# Salva os dados no MongoDB (remove antigos para evitar duplicatas)
+colecao_vendas.delete_many({})
+colecao_vendas.insert_many(df.to_dict(orient="records"))
+
+# Cria diretório para relatórios
 os.makedirs("relatorios", exist_ok=True)
 
 # Gera o relatório em .txt
@@ -39,3 +55,4 @@ with open(os.path.join("relatorios", "relatorio_resumo.txt"), "w", encoding="utf
     f.write(faturamento_por_data.to_string())
 
 print("✅ Relatório gerado com sucesso em 'relatorios/relatorio_resumo.txt'")
+print("✅ Dados armazenados no MongoDB com sucesso!")
