@@ -8,40 +8,41 @@ import pandas as pd
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
+# Carregar variáveis de ambiente
 load_dotenv()
 
-# Configuração MongoDB
+# MongoDB
 mongo_uri = os.getenv("MONGO_URI")
 client = MongoClient(mongo_uri)
 db = client["sistema_vendas"]
 colecao_vendas = db["vendas"]
 
-# Caminho planilha e diretórios
+# Caminhos
 CAMINHO_PLANILHA = os.path.join("dados", "planilha.xlsx")
 PASTA_RELATORIOS = "relatorios"
 os.makedirs(PASTA_RELATORIOS, exist_ok=True)
 
+# Interface
 class App(ttk.Window):
     def __init__(self):
-        super().__init__(themename="superhero")  # tema moderno
+        super().__init__(themename="superhero")
         self.title("Sistema de Vendas - Dashboard")
-        self.geometry("700x500")
+        self.geometry("720x520")
 
-        # Label topo
-        self.label_titulo = ttk.Label(self, text="Sistema de Vendas e Demandas", font=("Helvetica", 18, "bold"))
-        self.label_titulo.pack(pady=10)
+        # Ícones
+        self.icon_relatorio = tk.PhotoImage(file="icon_relatorio.png")
+        self.icon_salvar = tk.PhotoImage(file="icon_salvar.png")
+        self.icon_mostrar = tk.PhotoImage(file="icon_mostrar.png")
 
-        # Botões
-        self.btn_gerar_relatorio = ttk.Button(self, text="📊 Gerar Relatório", command=self.gerar_relatorio)
-        self.btn_gerar_relatorio.pack(pady=5, fill=X, padx=20)
+        # Título
+        ttk.Label(self, text="Sistema de Vendas e Demandas", font=("Helvetica", 18, "bold")).pack(pady=10)
 
-        self.btn_salvar_mongo = ttk.Button(self, text="📤 Salvar Dados no MongoDB", command=self.salvar_dados_mongo)
-        self.btn_salvar_mongo.pack(pady=5, fill=X, padx=20)
+        # Botões com ícones
+        ttk.Button(self, text="  Gerar Relatório", image=self.icon_relatorio, compound=LEFT, command=self.gerar_relatorio).pack(pady=5, fill=X, padx=20)
+        ttk.Button(self, text="  Salvar Dados no MongoDB", image=self.icon_salvar, compound=LEFT, command=self.salvar_dados_mongo).pack(pady=5, fill=X, padx=20)
+        ttk.Button(self, text="  Mostrar Relatório", image=self.icon_mostrar, compound=LEFT, command=self.mostrar_relatorio).pack(pady=5, fill=X, padx=20)
 
-        self.btn_mostrar_relatorio = ttk.Button(self, text="📄 Mostrar Relatório", command=self.mostrar_relatorio)
-        self.btn_mostrar_relatorio.pack(pady=5, fill=X, padx=20)
-
-        # Caixa texto para relatório
+        # Caixa de texto para relatório
         self.texto_relatorio = scrolledtext.ScrolledText(self, width=80, height=15)
         self.texto_relatorio.pack(pady=10, padx=20)
 
@@ -55,24 +56,23 @@ class App(ttk.Window):
         total_vendas = df['Quantidade'].sum()
         produto_mais_vendido = df.groupby('Produto')['Quantidade'].sum().idxmax()
         df['Faturamento'] = df['Quantidade'] * df['Preco_Unitario']
-        faturamento_por_produto = df.groupby('Produto')['Faturamento'].sum()
-        faturamento_por_data = df.groupby('Data')['Faturamento'].sum()
+        faturamento_produto = df.groupby('Produto')['Faturamento'].sum()
+        faturamento_data = df.groupby('Data')['Faturamento'].sum()
 
         texto = (
             f"📊 RELATÓRIO DE VENDAS\n\n"
             f"Total de vendas (itens): {total_vendas}\n"
             f"Produto mais vendido: {produto_mais_vendido}\n\n"
-            f"Faturamento por Produto:\n{faturamento_por_produto.to_string()}\n\n"
-            f"Faturamento por Data:\n{faturamento_por_data.to_string()}"
+            f"Faturamento por Produto:\n{faturamento_produto.to_string()}\n\n"
+            f"Faturamento por Data:\n{faturamento_data.to_string()}"
         )
 
-        # Salva em arquivo
         with open(os.path.join(PASTA_RELATORIOS, "relatorio_resumo.txt"), "w", encoding="utf-8") as f:
             f.write(texto)
 
         self.texto_relatorio.delete("1.0", tk.END)
         self.texto_relatorio.insert(tk.END, texto)
-        messagebox.showinfo("Sucesso", "Relatório gerado e exibido com sucesso!")
+        messagebox.showinfo("Sucesso", "Relatório gerado com sucesso!")
 
     def salvar_dados_mongo(self):
         if not os.path.exists(CAMINHO_PLANILHA):
@@ -95,7 +95,6 @@ class App(ttk.Window):
 
         self.texto_relatorio.delete("1.0", tk.END)
         self.texto_relatorio.insert(tk.END, conteudo)
-
 
 if __name__ == "__main__":
     app = App()
