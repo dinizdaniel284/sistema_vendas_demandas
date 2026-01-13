@@ -1,52 +1,45 @@
-💼Sistema de Vendas e Demandas
+# 💼 Sistema de Vendas & Gestão de Demandas
+### Automação de Dados com Python e MongoDB
 
-Projeto em Python para gerenciar vendas e demandas de forma simples e eficiente.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+  <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tkinter-GUI-blue?style=for-the-badge" />
+</p>
 
-⚙️ Funcionalidades
+> **Solução de Inteligência de Negócio:** Sistema desenvolvido para automatizar o fluxo de vendas, permitindo a transição de processos manuais (planilhas) para um banco de dados NoSQL escalável.
 
-📥 Importação de planilhas Excel
+---
 
-🗃️ Armazenamento no MongoDB
+### ⚙️ Funcionalidades Chave
+- [x] **ETL de Dados:** Importação automatizada de planilhas Excel (`.xlsx`) via Pandas.
+- [x] **Persistência NoSQL:** Armazenamento seguro e flexível utilizando MongoDB.
+- [x] **Dashboard GUI:** Interface gráfica intuitiva desenvolvida em Tkinter para facilitar o uso do usuário final.
+- [x] **Relatórios:** Geração de análises e métricas de demandas processadas.
 
-📊 Geração de relatórios
+---
 
-🖥️ Interface gráfica com Tkinter
+### 🛠️ Stack Tecnológica
+| Ferramenta | Função no Projeto |
+| :--- | :--- |
+| **Python** | Core do sistema e lógica de negócios |
+| **Pandas / OpenPyXL** | Manipulação e tratamento de dados complexos |
+| **MongoDB** | Banco de dados para armazenamento de alto desempenho |
+| **Tkinter** | Criação da interface visual para o usuário |
 
+---
 
-🛠️ Tecnologias
+### 🚀 Instruções de Instalação
 
-Python 🐍
+```bash
+# 1. Clone o repositório
+git clone [https://github.com/dinizdaniel284/sistema_vendas_demandas.git](https://github.com/dinizdaniel284/sistema_vendas_demandas.git)
 
-MongoDB 🍃
-
-Tkinter
-
-Pandas 🐼
-
-OpenPyXL 📄
-
-
-🚀 Como usar
-
-1. Clone o repositório:
-
-git clone https://github.com/dinizdaniel284/sistema_vendas_demandas.git
-
-
-2. Instale as dependências:
-
+# 2. Instale as dependências necessárias
 pip install -r requirements.txt
 
-
-3. Inicie o sistema:
-
+# 3. Certifique-se de que o MongoDB está rodando e inicie o sistema
 python app.py
-
-
-
-⚠️ Certifique-se de que o MongoDB esteja em execução.
-
 👨‍💻 Autor
-
-Desenvolvido por Daniel Diniz
-📧 dinizdaniel284@gmail.com
+Daniel Diniz
